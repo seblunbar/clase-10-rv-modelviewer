@@ -1,66 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-<meta charset="utf-8">
-<title>Feng Huang AR</title>
- 
-  <!-- Ajusta la página al tamaño de la pantalla y evita que el usuario haga zoom con los dedos -->
-<meta name="viewport" content="width=device-width, initial-scale=2.0, maximum-scale=2.0, user-scalable=no" />
- 
-  <!-- Carga la librería principal de A-Frame (el motor que hace funcionar todo el VR/AR) -->
-<script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
- 
-  <!-- Carga aframe-extras: paquete extra que incluye el "animation-mixer", necesario para que se reproduzca el aleteo -->
-<script src="https://cdn.jsdelivr.net/npm/aframe-extras@7.5.4/dist/aframe-extras.min.js"></script>
+  <meta charset="utf-8">
+  <title>Feng Huang AR</title>
+
+  <!-- Ajusta la página al tamaño de la pantalla y evita que el usuario haga zoom -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+  <!-- Carga la librería principal de A-Frame -->
+  <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+
+  <!-- Carga aframe-extras: paquete extra que incluye el "animation-mixer" para las animaciones -->
+  <script src="https://cdn.jsdelivr.net/npm/aframe-extras@7.5.4/dist/aframe-extras.min.js"></script>
 </head>
 <body>
- 
-<!-- LA ESCENA: aquí vive todo el mundo 3D/AR -->
+
+<!-- LA ESCENA: mundo 3D/AR -->
 <a-scene
   webxr="optionalFeatures: hit-test, local-floor, dom-overlay"
   xr-mode-ui="XRMode: ar">
-<!-- webxr: pide las funciones de AR al Quest.
-         · hit-test    = permite detectar superficies reales (mesa, piso)
-         · local-floor = ubica dónde está tu suelo real
-         · dom-overlay = permite mostrar botones HTML encima del AR
-       xr-mode-ui="XRMode: ar" = hace que el botón de entrada diga "AR" (paso-through) en vez de "VR" -->
- 
-  <!-- ZONA DE PRECARGA: A-Frame descarga estos archivos ANTES de mostrar la escena,
-       para que el modelo no aparezca a pedazos -->
-<a-assets timeout="10000">
-<!-- Registra tu modelo 3D y le pone el id "fenghuang" para poder referenciarlo abajo.
-         timeout="10000" = espera hasta 10 segundos a que cargue antes de rendirse -->
-<a-asset-item id="scp" src="scp.glb"></a-asset-item>
-</a-assets>
- 
-  <!-- EL AVE: una entidad que carga y muestra el modelo -->
-<a-entity
-    gltf-model="#scp"
+
+  <!-- ZONA DE PRECARGA -->
+  <a-assets timeout="10000">
+    <!-- Registra el modelo 3D con el ID "fenghuang" para vincularlo correctamente abajo -->
+    <a-asset-item id="fenghuang" src="scp.glb"></a-asset-item>
+  </a-assets>
+
+  <!-- EL AVE: entidad que carga y muestra el modelo -->
+  <a-entity
+    gltf-model="#fenghuang"
     animation-mixer="clip: *; loop: repeat"
     position="0 1.5 -4"
     scale="1 1 1"
     rotation="0 0 0">
-<!-- gltf-model="#fenghuang"  = usa el modelo que precargamos arriba (el # apunta a su id)
-         animation-mixer          = REPRODUCE LA ANIMACIÓN (el aleteo)
-             · clip: *            = reproduce todas las animaciones que tenga el modelo
-             · loop: repeat       = las repite en bucle infinito
-         position="0 1.5 -4"      = ubicación (X=izq/der, Y=altura, Z=cerca/lejos).
-                                    El -4 lo pone 4 metros frente a ti; Y=1.5 a la altura de la vista
-         scale="1 1 1"            = tamaño (1 = original). Súbelo o bájalo si sale gigante/diminuto
-         rotation="0 0 0"         = giro en grados (X, Y, Z). El del medio lo gira horizontalmente -->
-</a-entity>
- 
-  <!-- LUCES: los modelos glTF necesitan luz para verse; sin esto salen negros o planos -->
-<a-light type="ambient" intensity="0.9"></a-light>
-<!-- Luz ambiental = ilumina todo por igual, suave, sin sombras -->
- 
+  </a-entity>
+
+  <!-- LUCES -->
+  <a-light type="ambient" intensity="0.9"></a-light>
   <a-light type="directional" intensity="0.6" position="1 3 2"></a-light>
-<!-- Luz direccional = como el sol, viene de una dirección (aquí desde arriba-derecha) y da volumen -->
- 
-  <!-- IMPORTANTE: aquí NO hay <a-sky> ni <a-plane> a propósito.
-       En AR queremos ver tu cuarto real, así que no ponemos cielo ni suelo virtual
-       (si los pusiéramos, taparían la vista de tu habitación) -->
- 
+
 </a-scene>
 </body>
 </html>
