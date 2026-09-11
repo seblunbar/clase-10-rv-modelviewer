@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>SCP AR</title>
+<title>Feng Huang AR</title>
  
   <!-- Ajusta la página al tamaño de la pantalla y evita que el usuario haga zoom con los dedos -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -30,12 +30,12 @@
 <a-assets timeout="10000">
 <!-- Registra tu modelo 3D y le pone el id "fenghuang" para poder referenciarlo abajo.
          timeout="10000" = espera hasta 10 segundos a que cargue antes de rendirse -->
-<a-asset-item id="scp" src="scp"></a-asset-item>
+<a-asset-item id="scp" src="scp.glb"></a-asset-item>
 </a-assets>
  
   <!-- EL AVE: una entidad que carga y muestra el modelo -->
 <a-entity
-    gltf-model="#scp"
+    gltf-model="#fenghuang"
     animation-mixer="clip: *; loop: repeat"
     position="0 1.5 -4"
     scale="1 1 1"
