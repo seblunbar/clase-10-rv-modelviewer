@@ -3,39 +3,31 @@
 <head>
   <meta charset="utf-8">
   <title>Feng Huang AR</title>
-
-  <!-- Ajusta la página al tamaño de la pantalla y evita que el usuario haga zoom -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-
-  <!-- Carga la librería principal de A-Frame -->
   <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
-
-  <!-- Carga aframe-extras: paquete extra que incluye el "animation-mixer" para las animaciones -->
   <script src="https://cdn.jsdelivr.net/npm/aframe-extras@7.5.4/dist/aframe-extras.min.js"></script>
 </head>
 <body>
 
-<!-- LA ESCENA: mundo 3D/AR -->
 <a-scene
   webxr="optionalFeatures: hit-test, local-floor, dom-overlay"
   xr-mode-ui="XRMode: ar">
 
-  <!-- ZONA DE PRECARGA -->
   <a-assets timeout="10000">
-    <!-- Registra el modelo 3D con el ID "fenghuang" para vincularlo correctamente abajo -->
-    <a-asset-item id="fenghuang" src="scp.glb"></a-asset-item>
+    <!-- Se actualiza la ruta a scp.glb y el id a scp -->
+    <a-asset-item id="scp" src="scp.glb"></a-asset-item>
   </a-assets>
 
-  <!-- EL AVE: entidad que carga y muestra el modelo -->
+  <!-- Entidad vinculada al modelo #scp -->
   <a-entity
-    gltf-model="#fenghuang"
+    gltf-model="#scp"
     animation-mixer="clip: *; loop: repeat"
-    position="0 -1 -4"
+    animation="property: rotation; to: 0 360 0; loop: true; dur: 10000; easing: linear"
+    position="0 1.5 -4"
     scale="1 1 1"
     rotation="0 0 0">
   </a-entity>
 
-  <!-- LUCES -->
   <a-light type="ambient" intensity="0.9"></a-light>
   <a-light type="directional" intensity="0.6" position="1 3 2"></a-light>
 
