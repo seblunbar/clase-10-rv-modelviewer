@@ -4,21 +4,34 @@
   <meta charset="utf-8">
   <title>Feng Huang AR</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  
   <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/aframe-extras@7.5.4/dist/aframe-extras.min.js"></script>
+
+  <style>
+    /* Asegura que el canvas y el body tengan fondo transparente */
+    body, html {
+      background-color: transparent !important;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    .a-canvas {
+      background-color: transparent !important;
+    }
+  </style>
 </head>
 <body>
 
 <a-scene
   webxr="optionalFeatures: hit-test, local-floor, dom-overlay"
-  xr-mode-ui="XRMode: ar">
+  xr-mode-ui="XRMode: ar"
+  background="transparent: true">
 
   <a-assets timeout="10000">
-    <!-- Se actualiza la ruta a scp.glb y el id a scp -->
     <a-asset-item id="scp" src="scp.glb"></a-asset-item>
   </a-assets>
 
-  <!-- Entidad vinculada al modelo #scp -->
   <a-entity
     gltf-model="#scp"
     animation-mixer="clip: *; loop: repeat"
